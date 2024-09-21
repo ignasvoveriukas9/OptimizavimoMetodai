@@ -26,13 +26,12 @@ def newton ( f, fPrime, fDoublePrime, xi = 5, tol = 1e-4 ):
         xi1 = xi - ( fPrimeX / fDoublePrimeX )
 
         plt.plot ( xi, f ( xi ), 'o' )
-        print ( "iteration: " + str ( iteration ) + " xi: " + str ( xi ) )
+        print ( "iteration: " + str ( iteration ) + " xi: " + str ( xi ) + ' acc: ' + str ( abs ( xi1 - xi ) ) )
         iteration += 1
 
         if abs ( xi1 - xi ) < tol:
-            plt.plot ( xi1, f ( xi1 ), 'o' )
-            print ( "iteration: " + str ( iteration ) + "(final) xi: " + str ( xi1 ) )
-            return xi1, f ( xi1 ), iteration
+            plt.plot ( xi1, f ( xi1 ), 'o' ) 
+            return xi1, f ( xi1 ), iteration, iteration * 2
 
         xi = xi1
 

@@ -54,10 +54,10 @@ def goldenCut ( f, l, r, tol = 1e-4 ):
 
         iteration += 1
         
-        print ( 'iteration ' + str ( iteration ) + ': x1: ' + str ( x1 ) + ' x2: ' + str ( x2 ) )
+        print ( 'iteration ' + str ( iteration ) + ': x1: ' + str ( x1 ) + ' x2: ' + str ( x2 ) + ' L: ' + str(L) )
 
     xMin = ( r + l ) / 2
-    return xMin, f ( xMin ), iteration
+    return xMin, f ( xMin ), iteration, iteration + 2 
 
 def f ( x ):
     return ( ( ( ( x ** 2 ) - 3 ) ** 2 ) / 2 ) - 1
