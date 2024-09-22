@@ -41,7 +41,7 @@ def bisection ( f, rangeMin, rangeMax, tol = 1e-4 ):
         plt.plot ( mid, fM, 'o' )
         print ( 'mid point for iteration ' + str ( iterations ) + ': x: ' + str ( mid ) + ' y: ' + str ( fM ) )
         print ( 'Left: ' + str ( rangeMin ) + ' right: ' + str ( rangeMax ) )
-        print ( 'acc: ' + str (acc) + '/r/n' ) 
+        print ( 'acc: ' + str (acc) + '\r\n' ) 
         iterations += 1
 
     x_min = ( rangeMin + rangeMax ) / 2
