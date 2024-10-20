@@ -8,21 +8,31 @@ def distance ( point1, point2 ):
 
 def nelder_Mead ( start, lr, tol ):
 
-    x = np.linspace ( -0.1, 1, 100 )
-    y = np.linspace ( -0.1, 1, 100 )
+    x = np.linspace ( -0.1, 1.1, 500 )
+    y = np.linspace ( -0.1, 1.1, 500 )
     X, Y = np.meshgrid(x, y)
 
     Z = function ( X, Y )
 
-    fig = plt.figure()
-    ax = fig.add_subplot ( 111, projection = '3d' )
+    z_min = np.min ( Z )
+    z_max = np.max ( Z )
 
-    ax.plot_surface ( X, Y, Z, cmap = 'viridis', alpha = 0.5 )
+    neg_levels1 = np.linspace ( 4.2e-3, abs ( z_min ), 8 )
+    neg_levels2 = np.linspace ( 2e-3, 4e-3, 6 )
+    neg_levels3 = np.linspace ( 1e-4, 1.5e-3, 2)
+    neg_levels = ( - np.concatenate ( ( neg_levels3, neg_levels2, neg_levels1 ) ) ) [::-1]
+    pos_levels = np.geomspace ( 1e-3, 0.8, 8 )
 
-    ax.set_xlabel ( 'X' )
-    ax.set_ylabel ( 'Y' )
-    ax.set_zlabel ( 'f(X, Y)' )
-    ax.set_title ( 'grad des' )
+    levels = np.concatenate ( ( neg_levels, pos_levels ) )
+
+    plt.figure ( figsize = ( 8, 6 ) )
+
+    contour = plt.contour ( X, Y, Z, levels = levels, cmap = 'viridis' )
+    plt.clabel ( contour, inline = True, fontsize = 8 )
+    plt.title ( 'grad des' )
+    plt.xlabel ( 'X' )
+    plt.ylabel ( 'Y' )
+    plt.colorbar ( contour )
 
     iteration = 0
 

@@ -43,23 +43,33 @@ def goldenCut ( f, l, r, tol = 1e-4 ):
     xMin = ( r + l ) / 2
     return xMin
 
-def gradient_descent ( start, tol ):
+def fastest_descent ( start, tol ):
 
-    x = np.linspace ( -0.1, 1, 100 )
-    y = np.linspace ( -0.1, 1, 100 )
+    x = np.linspace ( -0.1, 1.2, 500 )
+    y = np.linspace ( -0.1, 1.2, 500 )
     X, Y = np.meshgrid(x, y)
 
     Z = function ( X, Y )
 
-    fig = plt.figure()
-    ax = fig.add_subplot ( 111, projection = '3d' )
+    z_min = np.min ( Z )
+    z_max = np.max ( Z )
 
-    ax.plot_surface ( X, Y, Z, cmap = 'viridis', alpha = 0.5 )
+    neg_levels1 = np.linspace ( 4.2e-3, abs ( z_min ), 8 )
+    neg_levels2 = np.linspace ( 2e-3, 4e-3, 6 )
+    neg_levels3 = np.linspace ( 1e-4, 1.5e-3, 2)
+    neg_levels = ( - np.concatenate ( ( neg_levels3, neg_levels2, neg_levels1 ) ) ) [::-1]
+    pos_levels = np.geomspace ( 1e-3, 0.8, 8 )
 
-    ax.set_xlabel ( 'X' )
-    ax.set_ylabel ( 'Y' )
-    ax.set_zlabel ( 'f(X, Y)' )
-    ax.set_title ( 'grad des' )
+    levels = np.concatenate ( ( neg_levels, pos_levels ) )
+
+    plt.figure ( figsize = ( 8, 6 ) )
+
+    contour = plt.contour ( X, Y, Z, levels = levels, cmap = 'viridis' )
+    plt.clabel ( contour, inline = True, fontsize = 8 )
+    plt.title ( 'grad des' )
+    plt.xlabel ( 'X' )
+    plt.ylabel ( 'Y' )
+    plt.colorbar ( contour )
 
     iteration = 0
 
@@ -81,7 +91,7 @@ def gradient_descent ( start, tol ):
 
     while abs ( new_x - x ) >= tol and abs ( new_y - y ) >= tol:
 
-        ax.scatter(x, y, function (x, y), color = 'r', s = 1)
+        plt.scatter(x, y, color = 'r', s = 1)
 
         iteration += 1
         
@@ -101,6 +111,8 @@ def gradient_descent ( start, tol ):
 
     x, y = new_x, new_y
 
+    plt.scatter ( x, y, color = 'r', s = 1 )
+
     return x, y, iteration
 
 def function ( x, y ):
@@ -112,7 +124,7 @@ def gradient_x ( x, y ):
 def gradient_y ( x, y ):
     return - ( x - ( x ** 2 ) - ( 2 * x * y ) ) / 8
 
-rez = gradient_descent ( ( (0), (0) ), 1e-4 )
+rez = fastest_descent ( ( (3/10), (2/10) ), 1e-4 )
 
 print ( rez )    
 
