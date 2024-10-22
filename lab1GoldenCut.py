@@ -10,6 +10,8 @@ def goldenCut ( f, l, r, tol = 1e-4 ):
     y = f ( x )
 
     plt.title ( 'Golden cut' )
+    plt.xlabel ( 'x' )
+    plt.ylabel ( 'y' )
     plt.plot ( x, y )
 
     iteration = 0

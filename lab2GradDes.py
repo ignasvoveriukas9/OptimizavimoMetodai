@@ -1,6 +1,10 @@
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+
+def distance ( point1, point2 ):
+    return math.sqrt ( ( ( point2 [ 0 ] - point1 [ 0 ] ) ** 2 ) + ( ( point2 [ 1 ] - point1 [ 1 ] ) ** 2 ) )
 
 def gradient_descent ( start, lr, tol ):
 
@@ -42,7 +46,7 @@ def gradient_descent ( start, lr, tol ):
 
     print ( f"Iteration 0: x = {x}, y = {y}, F(x, y) = {function (x,y)}" )
 
-    while abs ( new_x - x ) >= tol and abs ( new_y - y ) >= tol:
+    while distance ( ( x, y ), ( new_x, new_y ) ) >= tol: 
 
         plt.scatter(x, y, color = 'r', s = 1)
 
@@ -61,7 +65,7 @@ def gradient_descent ( start, lr, tol ):
     x, y = new_x, new_y
     plt.scatter(x, y, color = 'r', s = 1)
 
-    return x, y, iteration
+    return x, y, iteration, ( iteration * 2 ) + 2
 
 def function ( x, y ):
     return - ( x * y / 8 ) * ( 1 - x - y )

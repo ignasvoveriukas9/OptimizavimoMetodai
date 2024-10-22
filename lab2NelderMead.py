@@ -35,6 +35,7 @@ def nelder_Mead ( start, lr, tol ):
     plt.colorbar ( contour )
 
     iteration = 0
+    funcCalls = 0
 
     x0, y0 = start
 
@@ -54,7 +55,14 @@ def nelder_Mead ( start, lr, tol ):
             ( x2, y2, function ( x2, y2 ) ) 
             ]
 
-    while distance ( points [ 0 ], points [ 1 ] ) > tol and iteration < 50:
+    for i in range ( 0, len ( points ) ):
+        plt.scatter( points [ i ] [ 0 ], points [ i ] [ 1 ], s = 5)
+
+    plt.plot ( [ points [ 0 ] [ 0 ], points [ 1 ] [ 0 ], points [ 2 ] [ 0 ], points [ 0 ] [ 0 ] ]  , [ points [ 0 ] [ 1 ], points [ 1 ] [ 1 ], points [ 2 ] [ 1 ], points [ 0 ] [ 1 ] ] )
+
+    funcCalls += 3
+
+    while distance ( points [ 0 ], points [ 1 ] ) > tol and iteration < 100:
 
         iteration += 1
 
@@ -77,6 +85,7 @@ def nelder_Mead ( start, lr, tol ):
             xz = ( 3 * xc ) - ( 2 * points [ 2 ] [ 0 ] )
             yz = ( 3 * yc ) - ( 2 * points [ 2 ] [ 1 ] )
             fz = function ( xz, yz )
+            funcCalls += 1
             points [ 2 ] = ( xz, yz, fz )
             print ( "expanded" )
         elif fNew > points [ 0 ] [ 2 ] and fNew < points [ 1 ] [ 2 ]:
@@ -86,24 +95,28 @@ def nelder_Mead ( start, lr, tol ):
             xz = ( 1.5 * xc ) - ( 0.5 * points [ 2 ] [ 0 ] )
             yz = ( 1.5 * yc ) - ( 0.5 * points [ 2 ] [ 1 ] )
             fz = function ( xz, yz )
+            funcCalls += 1
             points [ 2 ] = ( xz, yz, fz )
             print ( "smaller" )
         elif fNew > points [ 2 ] [ 2 ]:
             xz = ( 0.5 * xc ) + ( 0.5 * points [ 2 ] [ 0 ] )
             yz = ( 0.5 * yc ) + ( 0.5 * points [ 2 ] [ 1 ] )
             fz = function ( xz, yz )
+            funcCalls += 1
             points [ 2 ] = ( xz, yz, fz )
             print ( "change direction" )
 
+        for i in range ( 0, len ( points ) ):
+            plt.scatter( points [ i ] [ 0 ], points [ i ] [ 1 ], s = 5)
 
+        plt.plot ( [ points [ 0 ] [ 0 ], points [ 1 ] [ 0 ], points [ 2 ] [ 0 ], points [ 0 ] [ 0 ] ]  , [ points [ 0 ] [ 1 ], points [ 1 ] [ 1 ], points [ 2 ] [ 1 ], points [ 0 ] [ 1 ] ] )
 
-
-    return points [ 0 ] [ 0 ], points [ 0 ] [ 1 ], iteration
+    return points [ 0 ] [ 0 ], points [ 0 ] [ 1 ], iteration, iteration + funcCalls
 
 def function ( x, y ):
     return - ( x * y / 8 ) * ( 1 - x - y )
 
-rez = nelder_Mead ( ( (0), (0) ), 0.4, 1e-4 )
+rez = nelder_Mead ( ( (1), (1) ), 0.4, 1e-4 )
 
 print ( rez )    
 

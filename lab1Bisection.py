@@ -8,6 +8,8 @@ def bisection ( f, rangeMin, rangeMax, tol = 1e-4 ):
     y = f ( x )
 
     plt.title ( 'bisection' )
+    plt.xlabel ( 'x' )
+    plt.ylabel ( 'y' )
     plt.plot ( x, y )
 
     acc = abs ( rangeMax - rangeMin )
@@ -15,6 +17,8 @@ def bisection ( f, rangeMin, rangeMax, tol = 1e-4 ):
 
     mid = ( rangeMin + rangeMax ) / 2
     fM = f ( mid )
+
+    plt.plot ( mid, fM, 'o' )
 
     while acc > tol: 
 

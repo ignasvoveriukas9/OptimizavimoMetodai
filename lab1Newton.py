@@ -8,6 +8,8 @@ def newton ( f, fPrime, fDoublePrime, xi = 5, tol = 1e-4 ):
     y = f ( x )
 
     plt.title ( 'newton' )
+    plt.xlabel ( 'x' )
+    plt.ylabel ( 'y' )
     plt.plot ( x, y )
 
     plt.plot ( xi, f ( xi ), 'o' )
