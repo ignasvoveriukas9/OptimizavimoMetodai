@@ -12,7 +12,7 @@ def newton ( f, fPrime, fDoublePrime, xi = 5, tol = 1e-4 ):
     plt.ylabel ( 'y' )
     plt.plot ( x, y )
 
-    plt.plot ( xi, f ( xi ), 'o' )
+    plt.plot ( xi, f ( xi ), 'o', color = 'g' )
 
     iteration = 0
 
@@ -27,12 +27,12 @@ def newton ( f, fPrime, fDoublePrime, xi = 5, tol = 1e-4 ):
 
         xi1 = xi - ( fPrimeX / fDoublePrimeX )
 
-        plt.plot ( xi, f ( xi ), 'o' )
+        plt.plot ( xi, f ( xi ), 'o', color = 'g' )
         print ( "iteration: " + str ( iteration ) + " xi: " + str ( xi ) + ' acc: ' + str ( abs ( xi1 - xi ) ) )
         iteration += 1
 
         if abs ( xi1 - xi ) < tol:
-            plt.plot ( xi1, f ( xi1 ), 'o' ) 
+            plt.scatter ( xi1, f ( xi1 ), s = 100, c = 'r', alpha = 0.5 ) 
             return xi1, f ( xi1 ), iteration, iteration * 2
 
         xi = xi1

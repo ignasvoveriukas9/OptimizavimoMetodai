@@ -70,7 +70,7 @@ def fastest_descent ( start, tol ):
 
     contour = plt.contour ( X, Y, Z, levels = levels, cmap = 'viridis' )
     plt.clabel ( contour, inline = True, fontsize = 8 )
-    plt.title ( 'grad des' )
+    plt.title ( 'fast des' )
     plt.xlabel ( 'X' )
     plt.ylabel ( 'Y' )
     plt.colorbar ( contour )
@@ -87,7 +87,7 @@ def fastest_descent ( start, tol ):
     def f_alpha ( alpha ):
         return function ( x - alpha * grad_x, y - alpha * grad_y )
 
-    alpha_opt, funcCall = goldenCut ( f_alpha, 0 ,3 )
+    alpha_opt, funcCall = goldenCut ( f_alpha, 0 ,5 )
 
     funcCalls += funcCall
 
@@ -98,7 +98,8 @@ def fastest_descent ( start, tol ):
 
     while distance ( ( x, y ), ( new_x, new_y ) ) >= tol:
 
-        plt.scatter(x, y, color = 'r', s = 1)
+        plt.scatter ( x, y, color = 'r', s = 2 )
+        plt.text ( x, y + 0.005, f'{iteration}', color = 'black', ha = 'center', fontsize = 10 )
 
         iteration += 1
         
@@ -109,7 +110,7 @@ def fastest_descent ( start, tol ):
         grad_x = gradient_x ( x, y )
         grad_y = gradient_y ( x, y )
 
-        alpha_opt, funcCall = goldenCut ( f_alpha, 0 ,3 )
+        alpha_opt, funcCall = goldenCut ( f_alpha, 0 ,5 )
 
         funcCalls += funcCall
 
@@ -120,7 +121,7 @@ def fastest_descent ( start, tol ):
 
     x, y = new_x, new_y
 
-    plt.scatter ( x, y, color = 'r', s = 1 )
+    plt.scatter ( x, y, color = 'b', s = 5 )
 
     return x, y, iteration, ( ( iteration * 2 ) + 2 ) + funcCalls
 

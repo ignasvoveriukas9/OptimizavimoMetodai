@@ -18,7 +18,7 @@ def bisection ( f, rangeMin, rangeMax, tol = 1e-4 ):
     mid = ( rangeMin + rangeMax ) / 2
     fM = f ( mid )
 
-    plt.plot ( mid, fM, 'o' )
+    plt.plot ( mid, fM, 'o', color = 'g' )
 
     while acc > tol: 
 
@@ -42,13 +42,14 @@ def bisection ( f, rangeMin, rangeMax, tol = 1e-4 ):
 
         acc = abs ( rangeMax - rangeMin )
 
-        plt.plot ( mid, fM, 'o' )
+        plt.plot ( mid, fM, 'o', color = 'g' )
         print ( 'mid point for iteration ' + str ( iterations ) + ': x: ' + str ( mid ) + ' y: ' + str ( fM ) )
         print ( 'Left: ' + str ( rangeMin ) + ' right: ' + str ( rangeMax ) )
         print ( 'acc: ' + str (acc) + '\r\n' ) 
         iterations += 1
-
+    
     x_min = ( rangeMin + rangeMax ) / 2
+    plt.scatter ( x_min, f ( x_min ), s = 100, c = 'r', alpha = 0.5 )
     return x_min, f ( x_min ), iterations, ( iterations * 2 ) + 1
 
 

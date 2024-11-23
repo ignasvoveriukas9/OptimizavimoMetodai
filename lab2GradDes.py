@@ -48,7 +48,8 @@ def gradient_descent ( start, lr, tol ):
 
     while distance ( ( x, y ), ( new_x, new_y ) ) >= tol: 
 
-        plt.scatter(x, y, color = 'r', s = 1)
+        plt.scatter ( x, y, color = 'r', s = 2 )
+        plt.text ( x, y + 0.005, f'{iteration}', color = 'black', ha = 'center', fontsize = 10 )
 
         iteration += 1
         
@@ -63,7 +64,7 @@ def gradient_descent ( start, lr, tol ):
         new_y = y - ( lr * grad_y )
 
     x, y = new_x, new_y
-    plt.scatter(x, y, color = 'r', s = 1)
+    plt.scatter(x, y, color = 'b', s = 5)
 
     return x, y, iteration, ( iteration * 2 ) + 2
 

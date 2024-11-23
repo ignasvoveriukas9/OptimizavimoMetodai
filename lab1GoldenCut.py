@@ -24,8 +24,8 @@ def goldenCut ( f, l, r, tol = 1e-4 ):
     fx1 = f ( x1 )
     fx2 = f ( x2 )
 
-    plt.plot ( x1, fx1, 'o' )
-    plt.plot ( x2, fx2, 'o' )
+    plt.plot ( x1, fx1, 'o', color = 'g' )
+    plt.plot ( x2, fx2, 'o', color = 'g' )
 
     print ( 'iteration ' + str ( iteration ) + ': x1: ' + str ( x1 ) + ' x2: ' + str ( x2 ) )
 
@@ -41,7 +41,7 @@ def goldenCut ( f, l, r, tol = 1e-4 ):
             x2 = l + ( t * L )
             fx2 = f ( x2 )
 
-            plt.plot ( x2, fx2, 'o' )
+            plt.plot ( x2, fx2, 'o', color = 'g' )
         else:
             r = x2
             L = r - l
@@ -52,13 +52,14 @@ def goldenCut ( f, l, r, tol = 1e-4 ):
             x1 = r - ( t * L )
             fx1 = f ( x1 )
 
-            plt.plot ( x1, fx1, 'o' )
+            plt.plot ( x1, fx1, 'o', color = 'g' )
 
         iteration += 1
         
         print ( 'iteration ' + str ( iteration ) + ': x1: ' + str ( x1 ) + ' x2: ' + str ( x2 ) + ' L: ' + str(L) )
 
     xMin = ( r + l ) / 2
+    plt.scatter ( xMin, f ( xMin ), s = 100, c = 'r', alpha = 0.5 )
     return xMin, f ( xMin ), iteration, iteration + 2 
 
 def f ( x ):

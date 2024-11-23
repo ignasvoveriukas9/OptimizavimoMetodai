@@ -29,7 +29,7 @@ def nelder_Mead ( start, lr, tol ):
 
     contour = plt.contour ( X, Y, Z, levels = levels, cmap = 'viridis' )
     plt.clabel ( contour, inline = True, fontsize = 8 )
-    plt.title ( 'grad des' )
+    plt.title ( 'Nelder Mead' )
     plt.xlabel ( 'X' )
     plt.ylabel ( 'Y' )
     plt.colorbar ( contour )
@@ -57,6 +57,7 @@ def nelder_Mead ( start, lr, tol ):
 
     for i in range ( 0, len ( points ) ):
         plt.scatter( points [ i ] [ 0 ], points [ i ] [ 1 ], s = 5)
+        plt.text ( points [ i ] [ 0 ], points [ i ] [ 1 ] + 0.005, f'{iteration + i}', color = 'black', ha = 'center', fontsize = 10 )
 
     plt.plot ( [ points [ 0 ] [ 0 ], points [ 1 ] [ 0 ], points [ 2 ] [ 0 ], points [ 0 ] [ 0 ] ]  , [ points [ 0 ] [ 1 ], points [ 1 ] [ 1 ], points [ 2 ] [ 1 ], points [ 0 ] [ 1 ] ] )
 
@@ -87,9 +88,11 @@ def nelder_Mead ( start, lr, tol ):
             fz = function ( xz, yz )
             funcCalls += 1
             points [ 2 ] = ( xz, yz, fz )
+            plt.text ( points [ 2 ] [ 0 ], points [ 2 ] [ 1 ] + 0.005, f'{iteration + 2}', color = 'black', ha = 'center', fontsize = 10 )
             print ( "expanded" )
         elif fNew > points [ 0 ] [ 2 ] and fNew < points [ 1 ] [ 2 ]:
             points [ 2 ] = ( xNew, yNew, fNew )
+            plt.text ( points [ 2 ] [ 0 ], points [ 2 ] [ 1 ] + 0.005, f'{iteration + 2}', color = 'black', ha = 'center', fontsize = 10 )
             print ( "normal" )
         elif fNew > points [ 1 ] [ 2 ] and fNew < points [ 2 ] [ 2 ]:
             xz = ( 1.5 * xc ) - ( 0.5 * points [ 2 ] [ 0 ] )
@@ -97,6 +100,7 @@ def nelder_Mead ( start, lr, tol ):
             fz = function ( xz, yz )
             funcCalls += 1
             points [ 2 ] = ( xz, yz, fz )
+            plt.text ( points [ 2 ] [ 0 ], points [ 2 ] [ 1 ] + 0.005, f'{iteration + 2}', color = 'black', ha = 'center', fontsize = 10 )
             print ( "smaller" )
         elif fNew > points [ 2 ] [ 2 ]:
             xz = ( 0.5 * xc ) + ( 0.5 * points [ 2 ] [ 0 ] )
@@ -104,6 +108,7 @@ def nelder_Mead ( start, lr, tol ):
             fz = function ( xz, yz )
             funcCalls += 1
             points [ 2 ] = ( xz, yz, fz )
+            plt.text ( points [ 2 ] [ 0 ], points [ 2 ] [ 1 ] + 0.005, f'{iteration + 2}', color = 'black', ha = 'center', fontsize = 10 )
             print ( "change direction" )
 
         for i in range ( 0, len ( points ) ):
