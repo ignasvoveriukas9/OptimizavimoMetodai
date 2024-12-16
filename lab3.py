@@ -110,7 +110,7 @@ def gradient_z ( x, y, z, r ):
 
     return ( - ( x * y ) ) + ( ( 1 / r ) * ( g + ( ( 4 * ( ( 2 * ( ( x * y ) + ( y * z ) + ( x * z ) ) ) - 1 ) ) * ( x + y ) ) ) )
     
-rez = optimizeFunction ( ( 1, 1, 1 ), 1, 5 )
+rez = optimizeFunction ( ( 0.8, 0.81, 0.8 ), 1, 5 )
 
 print ( rez ) 
 

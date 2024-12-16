@@ -7,18 +7,35 @@ def simplex( matrix ):
 
     while True:
 
-        print ( matrix )
+        #print ( matrix )
+        print("Matrix:")
+        for row in matrix:
+            print ( row )
+        print ( "Base" )
         print ( base )
 
         addToBase = whichToAdd ( matrix [0] )
 
+        print ( "Add to base collum:")
         print ( addToBase )
 
         if addToBase == -1:
-            return matrix [0]
+            x1, x2, x3, x4 = 0, 0, 0, 0
+            for i, value in enumerate ( base ):
+                if value == 1:
+                    x1 = matrix [ i + 1 ] [ 0 ]
+                elif value == 2:
+                    x2 = matrix [ i + 1 ] [ 0 ]
+                elif value == 3:
+                    x3 = matrix [ i + 1 ] [ 0 ]
+                elif value == 4:
+                    x4 = matrix [ i + 1 ] [ 0 ]
+
+            return -matrix [0][0], x1, x2, x3, x4
 
         removeFromBase = whichToRemove ( matrix, base, addToBase )
 
+        print ( "Remove from base (index of base)" )
         print ( removeFromBase )
 
         matrix, base = switchBase ( matrix, base, addToBase, removeFromBase )
@@ -76,7 +93,15 @@ orgMatrix = [
         [ 3.0,  0.0,  0.0,  1.0,  1.0, 0.0, 0.0, 1.0]
         ]
 
+myMatrix = [
+        [ 0.0,  2.0, -3.0,  0.0, -5.0, 0.0, 0.0, 0.0],
+        [ 6.0, -1.0,  1.0, -1.0, -1.0, 1.0, 0.0, 0.0],
+        [3.0,  2.0,  4.0,  0.0,  0.0, 0.0, 1.0, 0.0],
+        [ 2.0,  0.0,  0.0,  1.0,  1.0, 0.0, 0.0, 1.0]
+        ]
+
+
 #print ( whichToRemove (orgMatrix, [5, 6, 7], whichToAdd (orgMatrix[0]) ) )
 #print ( switchBase ( orgMatrix, [5, 6, 7], 2, 1 ) )
-print ( simplex ( orgMatrix ) )
+print ( simplex ( myMatrix ) )
 
